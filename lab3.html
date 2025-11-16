@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lab 3 Portfolio</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========== Basics ========== */
+    :root{
+      --nav-blue: #1e57d5;
+      --accent: #7b1fa2; /* purple for 'Full Stack' */
+      --skill-blue: #123f8a; /* dark skill boxes */
+      --project-bg: #111; /* fallback */
+      --white: #ffffff;
+    }
+    html { box-sizing: border-box; font-size: 16px; }
+    *, *::before, *::after { box-sizing: inherit; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', system-ui, -apple-system, Arial, sans-serif;
+      background: #fff;
+      color: #111;
+      line-height: 1.4;
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 1.25rem; }
+
+    /* ========== NAVBAR ========== */
+    header {
+      background: var(--nav-blue);
+      color: var(--white);
+      padding: 0.9rem 0;
+    }
+    .nav-inner { display:flex; align-items:center; justify-content:space-between; gap:1rem; max-width:1100px; margin:0 auto; padding:0 1.25rem; }
+    .brand { font-weight:700; font-size:1.125rem; color:var(--white); }
+    nav { display:flex; align-items:center; gap:1rem; }
+    nav a { color:var(--white); text-decoration:none; font-weight:500; opacity:0.95; }
+    .nav-box { width:18px; height:18px; background:var(--white); border-radius:4px; margin-right:0.5rem; }
+
+    /* ========== HERO ========== */
+    .hero { display:flex; align-items:center; justify-content:space-between; gap:1.25rem; padding:2.5rem 0; }
+    .hero-left { flex:1 1 60%; min-width:240px; }
+    .hero-right { flex:0 0 220px; display:flex; justify-content:flex-end; }
+    h1.lead { margin:0; font-size:2rem; font-weight:700; }
+    p.role {
+      margin:0.6rem 0 0;
+      font-weight:700;
+      color:var(--accent);
+      font-size:2.5rem; /* large purple text */
+      letter-spacing:0.5px;
+      display:inline-block;
+    }
+    /* subtle color-change animation (medium speed) */
+    .role { animation: roleColor 1.6s ease-in-out infinite; }
+    @keyframes roleColor {
+      0% { color: var(--accent); }
+      50% { color: #d81b60; }
+      100% { color: var(--accent); }
+    }
+
+    /* profile circle */
+    .avatar { width:220px; height:220px; border-radius:50%; overflow:hidden; box-shadow: 0 12px 30px rgba(12,20,40,0.12); }
+    .avatar img { width:100%; height:100%; object-fit:cover; display:block; }
+
+    /* ========== ABOUT ========== */
+    section { padding: 1.5rem 0; }
+
+    /* ========== SKILLS ========== */
+    .skills-grid { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:1rem; }
+    .skill {
+      background: var(--skill-blue);
+      color: #fff;
+      padding: 0.9rem 2rem;
+      border-radius: 12px;
+      min-width: 160px;
+      text-align:center;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+      font-weight:600;
+      transition: transform .18s ease;
+    }
+    .skill:hover { transform: translateY(-6px); }
+
+    /* ========== PROJECTS (stacked, large images) ========== */
+    .projects-list { display:flex; flex-direction:column; gap:2rem; margin-top:1rem; }
+    .project-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 1rem;
+      box-shadow: 0 16px 40px rgba(12,20,40,0.08);
+      overflow: visible;
+    }
+
+    /* image container: fixed height, rounded corners, shadow */
+    .project-img {
+      width:100%;
+      height:500px;                     /* large screenshot look on desktop */
+      border-radius:12px;
+      overflow:hidden;
+      position:relative;
+      background: #f3f4f8;
+      box-shadow: 0 8px 30px rgba(8,12,30,0.10);
+      margin-bottom:0.9rem;
+    }
+    .project-img img {
+      position:absolute; left:0; top:0;
+      width:100%; height:100%;
+      object-fit:cover;
+      transition: opacity 1s ease;    /* medium-speed fade */
+    }
+    .img-default { opacity:1; }
+    .img-hover   { opacity:0; }
+
+    .project-img:hover .img-default { opacity:0; }
+    .project-img:hover .img-hover   { opacity:1; }
+
+    .project-card h3 { margin:0; font-size:1.125rem; color:#111; }
+
+    /* ========== CONTACT (small centered card) ========== */
+    .contact-wrap { display:flex; justify-content:center; padding:2rem 0; }
+    .contact-card {
+      width:320px;
+      background:#fff;
+      border-radius:10px;
+      box-shadow: 0 14px 36px rgba(12,20,40,0.12);
+      padding:1rem;
+    }
+    .contact-card input, .contact-card textarea {
+      width:100%; padding:0.65rem; margin-bottom:0.6rem; border-radius:6px; border:1px solid #d5dbe6;
+      font-family:inherit;
+    }
+    .contact-card button {
+      padding:0.6rem 1rem; background:var(--nav-blue); color:#fff; border:none; border-radius:6px; cursor:pointer;
+      width:100%;
+    }
+
+    /* Back to top */
+    #topBtn { position:fixed; right:18px; bottom:18px; background:var(--nav-blue); color:#fff; border:none; padding:0.6rem 0.9rem; border-radius:8px; cursor:pointer; box-shadow:0 8px 18px rgba(12,20,40,0.12); }
+
+    /* ========== Responsive (mobile-first adjustments) ========== */
+    @media (max-width:900px){
+      .hero { gap:1rem; }
+      .hero-right { flex:0 0 180px; }
+      .avatar { width:180px; height:180px; }
+      .project-img { height:220px; }
+    }
+
+    @media (max-width:600px){
+      .nav-inner { padding: 0 0.75rem; }
+      .hero { flex-direction:column-reverse; align-items:center; text-align:center; padding:1.5rem 0; }
+      .hero-left { max-width:100%; }
+      .hero-right { flex:0 0 auto; margin-bottom:.5rem; }
+      .role { font-size:2rem; display:block; }
+      .avatar { width:140px; height:140px; }
+      .project-img { height:160px; border-radius:10px; }
+      .skills-grid { gap:0.6rem; }
+      .skill { min-width:120px; padding:0.8rem 1.2rem; }
+      .contact-card { width:92%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header>
+    <div class="nav-inner">
+      <div class="brand">My Portfolio</div>
+      <nav>
+        <div class="nav-box" aria-hidden="true"></div>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero" aria-label="hero">
+      <div class="hero-left">
+        <h1 class="lead">Hi, I am</h1>
+        <p class="role">Full Stack Web Developer</p>
+      </div>
+
+      <div class="hero-right">
+        <div class="avatar" role="img" aria-label="profile picture">
+          <img src="images/profile.jpg" alt="Profile">
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2>About Me</h2>
+      <p>I am a student learning web development. This project uses Flexbox, Grid techniques, relative units, hover effects and keyframe animation as required in Lab 3.</p>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <h2>My Skills</h2>
+      <div class="skills-grid" role="list">
+        <div class="skill" role="listitem">HTML</div>
+        <div class="skill" role="listitem">CSS</div>
+        <div class="skill" role="listitem">Flexbox</div>
+        <div class="skill" role="listitem">Grid</div>
+        <div class="skill" role="listitem">Responsive Design</div>
+        <div class="skill" role="listitem">JavaScript Basics</div>
+      </div>
+    </section>
+
+    <!-- PROJECTS (stacked, large images with hover swap) -->
+    <section id="projects">
+      <h2>My Projects</h2>
+
+      <div class="projects-list">
+        <!-- Project 1 -->
+        <article class="project-card">
+          <div class="project-img" aria-hidden="true">
+            <img src="images/project1-default.jpg" alt="Project 1 default" class="img-default">
+            <img src="images/project2-hover.jpg"   alt="Project 1 hover"   class="img-hover">
+          </div>
+          <h3>Project One</h3>
+          <p>This is the second portfolio website I made using some CSS.</p>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="project-card">
+          <div class="project-img" aria-hidden="true">
+            <img src="images/project3-default.jpg" alt="Project 2 default" class="img-default">
+            <img src="images/project4-hover.jpg"   alt="Project 2 hover"   class="img-hover">
+          </div>
+          <h3>Project Two</h3>
+          <p>This is a calorie tracker project I made it using python.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTACT (small centered card) -->
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <div class="contact-wrap">
+        <form class="contact-card" action="#" method="post" onsubmit="return false;">
+          <input type="text" placeholder="Your Name" required>
+          <input type="email" placeholder="Email" required>
+          <textarea rows="4" placeholder="Message" required></textarea>
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer style="background:var(--nav-blue); color:white; padding:0.75rem 0; text-align:center;">
+    © 2025 My Portfolio | Mohd Hammaz
+  </footer>
+
+  <button id="topBtn" onclick="window.scrollTo({top:0, behavior:'smooth'})">Back to Top</button>
+
+</body>
+</html>
