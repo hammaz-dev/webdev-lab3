@@ -2,7 +2,7 @@
 I used internal css in this assignment
 🚀 Personal Portfolio Website
 
-A responsive, static portfolio website built to showcase my academic journey in AI & Robotics.
+A responsive, static portfolio website built to showcase my academic journey in Software Engineering.
 
 📄 Project Overview
 
